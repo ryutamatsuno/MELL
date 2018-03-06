@@ -4,7 +4,6 @@ import numpy as np
 import random
 import math
 from sklearn.metrics import roc_auc_score
-#from utility import tf_stack,getZeroEdges
 
 
 # random_seed = 2017
@@ -17,7 +16,7 @@ class MELL_model:
 
     """
 
-    def __init__(self,L,N,directed,edges,d,k,lamm,beta,gamma,eta = 0.075):
+    def __init__(self, L, N, directed, edges, d, k, lamm, beta, gamma, eta = 0.075):
         """
 
         :param L       : num of layer
@@ -46,15 +45,14 @@ class MELL_model:
         self.gamma = gamma
         self.eta   = eta
 
-        print('d    :',d)
-        print('k    :',k)
-        print('lamm :',lamm)
-        print('beta :',beta)
-        print('gamma:',gamma)
+        print('d    :', d)
+        print('k    :', k)
+        print('lamm :', lamm)
+        print('beta :', beta)
+        print('gamma:', gamma)
 
 
         self.zeroEdges = getZeroEdges(L, N, directed, edges)
-
 
         self.init_graph()
 
@@ -128,7 +126,8 @@ class MELL_model:
 
     def train(self, max_iteration):
         """
-
+        train part
+        In the case that the stopping is dependent on the diff of the loss, the stopping part should be modified.
         :param max_iteration: number of eteration
         :return:
         """
@@ -163,9 +162,15 @@ class MELL_model:
 
 
     def predict(self,e):
+        """
+
+        :param e: [l h t], where l denotes the layer index, h and t denotes the head node and the tail node index, respectively.
+        :return:
+        """
         if self.directed:
             return  self.__predict(e)
         return  (self.__predict(e) + self.__predict([e[0],e[2],e[1]]))/2
+
 
 ###############################################################
 # Loss functions
@@ -178,7 +183,6 @@ def embeddingCost_neg(VH,VT, D, negEdges):
     # need reshape
 
     L,N,d = VH.get_shape().as_list() # N * N * d
-
 
     HL = tf.reshape(VH,[-1,d])
     TL = tf.reshape(VT,[-1,d])
@@ -227,7 +231,6 @@ def loss(VH, VT, D, lamm, posEdges, negEdges,beta,gamma):
     return  cost + reg_E + reg_V + reg_R
 
 
-
 ###############################################################
 # General functions
 ###############################################################
@@ -256,7 +259,7 @@ def adjacencyMatrix(L, N, directed,edges):
     return A
 
 
-def tf_stack(x,n):
+def tf_stack(x, n):
     if type(x) is list:
         shape = list(np.array(x).shape)
     else:
@@ -281,7 +284,3 @@ def getSample(data, sample_size):
     sampled = np.array(data)[permutation]
     return sampled.tolist()
 
-
-
-
-###############################################################

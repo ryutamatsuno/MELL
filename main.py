@@ -25,10 +25,10 @@ if __name__ == "__main__":
     print("test  edge : ", len(test_edges))
     print("====================================")
 
-    model = MELL_model(data.L,data.N,data.directed,train_edges,128,4,10,1,1)
+    model = MELL_model(data.L, data.N, data.directed, train_edges, 128, 4, 10, 1, 1)
     model.train(500)
 
-    y_true = np.array(test_edges)[:,3]
+    y_true = np.array(test_edges)[:, 3]
     y_predict = [ model.predict(t) for t in test_edges]
 
     auc = roc_auc_score(y_true, y_predict)
