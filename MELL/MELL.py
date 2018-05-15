@@ -145,7 +145,19 @@ class MELL_model:
                 print("step %5d: loss = %15.4f, diff = %15.4f" % (i + 1, loss, diff))
 
         self.resVH, self.resVT, self.resR = self.sess.run((self.VH,self.VT, self.R))
+        
+    def save_embedding(self, dir_path):
+        # save embedding results to dir_path/***.npy
+        np.save(dir_path + '/VH.npy', self.resVH)
+        np.save(dir_path + '/VT.npy', self.resVT)
+        np.save(dir_path + '/R.npy', self.resR)
 
+    def load_embedding(self, dir_path):
+        # load embedding .npy file from dir_path/***.npy
+        self.resVH = np.load(dir_path + '/VH.npy')
+        self.resVT = np.load(dir_path + '/VT.npy')
+        self.resR  = np.load(dir_path + '/R.npy')
+        
     def __predict(self,e):
         #V, R, l, h, t
         l = e[0]
