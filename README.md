@@ -1,6 +1,7 @@
 # MELL
 MELL is short for Multiplex network Embedding via Learning Layer vectors. This method is for embedding multiplex network. Multiplex network is a multi-layer network where all layers have the same set of nodes.
 
+PDF: https://dl.acm.org/citation.cfm?id=3191565
 
 # How to use
 
