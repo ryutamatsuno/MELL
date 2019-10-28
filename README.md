@@ -35,6 +35,20 @@ model.train(500)
 prediction = [ model.predict(t) for t in test_edges]
 ```
 
+# Citation
+```
+@inproceedings{
+matsuno2018,
+title={MELL: Effective Embedding Method for Multiplex Networks},
+author={Ryuta Matsuno and Tsuyoshi Murata},
+booktitle={WWW '18 Companion Proceedings of the The Web Conference 2018},
+year={2019},
+pages={1261--1268},
+url={http://www.doi.org/10.1145/3184558.3191565},
+}
+```
+
+
 # License
 
 Creative Commons Attribution 4.0 International (CC BY 4.0) License.
