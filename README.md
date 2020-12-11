@@ -51,5 +51,4 @@ url={http://www.doi.org/10.1145/3184558.3191565},
 
 # License
 
-Creative Commons Attribution 4.0 International (CC BY 4.0) License.
-
+MIT
